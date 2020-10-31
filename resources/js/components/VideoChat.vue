@@ -8,7 +8,7 @@
       <video class="video-here" ref="video-here" autoplay></video>
       <video class="video-there" ref="video-there" autoplay></video>
       CONNECT WITH :-
-      <div class="text-left" v-for="(name, userId) in others" :key="userId">
+      <div class="text-left" style="display:flex; flex-direction:row;" v-for="(name, userId) in others" :key="userId">
         <button
           @click="startVideoChat(userId)"
           v-text="`${name}`"
@@ -73,6 +73,7 @@ export default {
         audio: true,
       });
       const videoHere = this.$refs["video-here"];
+      videoHere.mute = true;
       videoHere.srcObject = stream;
       this.stream = stream;
       const pusher = this.getPusherInstance();
