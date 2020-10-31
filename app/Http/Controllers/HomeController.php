@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('home', [
-            'randId' => Str::random(6)
+            'randId' => Str::random(4)
         ]);
     }
 }
