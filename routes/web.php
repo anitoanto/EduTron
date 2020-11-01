@@ -45,4 +45,4 @@ Route::get('/share/{data}', function ($data) {
     event(new ShareRotation($data));
 });
 
-Route::post('/label/webhook', [DialogFlowController::class, 'notifyWithLabel']);
+Route::get('/label/webhook', [DialogFlowController::class, 'notifyWithLabel']);
