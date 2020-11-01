@@ -1,18 +1,36 @@
 <template>
-  <div class="container">
-    <div
-      class="video-container"
-      ref="video-container"
-      style="padding-top: 30px"
-    >
-      <video class="video-here" ref="video-here" autoplay></video>
-      <video class="video-there" ref="video-there" autoplay></video>
-      CONNECT WITH :-
-      <div class="text-left" style="display:flex; flex-direction:row;" v-for="(name, userId) in others" :key="userId">
-        <button
-          @click="startVideoChat(userId)"
-          v-text="`${name}`"
-        />
+  <div class="container vmain-c">
+    <div class="labels">
+      <button
+        class="labelBtn"
+        @click="makeRotation(40)"
+        v-text="'Label 1'"
+      />
+    </div>
+    <div class="video-container" ref="video-container">
+      <div>
+        <video class="video-here" ref="video-here" autoplay></video>
+      </div>
+
+      <div class="video-there-container">
+        <video class="video-there" ref="video-there" autoplay></video>
+        <div class="model_container">
+          <model-viewer
+            class="model_class"
+            id="modelid"
+            src="/storage/cube_model.glb"
+            shadow-intensity="1"
+            camera-controls
+            interaction-prompt="none"
+          >
+          </model-viewer>
+        </div>
+      </div>
+      <div class="user_btns">
+        CONNECT WITH :-
+        <div v-for="(name, userId) in others" :key="userId">
+          <button @click="startVideoChat(userId)" v-text="`${name}`" />
+        </div>
       </div>
     </div>
   </div>
@@ -22,7 +40,7 @@
 import Pusher from "pusher-js";
 import Peer from "simple-peer";
 export default {
-  props: ["user", "others", "pusherKey", "pusherCluster","randomid"],
+  props: ["user", "others", "pusherKey", "pusherCluster", "randomid"],
   data() {
     return {
       channel: null,
@@ -35,6 +53,7 @@ export default {
   },
   methods: {
     startVideoChat(userId) {
+      console.log("Ok Clicked.");
       this.getPeer(userId, true);
     },
     getPeer(userId, initiator) {
@@ -73,8 +92,8 @@ export default {
         audio: true,
       });
       const videoHere = this.$refs["video-here"];
-      videoHere.mute = true;
       videoHere.srcObject = stream;
+      videoHere.mute = true;
       this.stream = stream;
       const pusher = this.getPusherInstance();
       this.channel = pusher.subscribe(`presence-${this.randomid}`);
@@ -96,33 +115,68 @@ export default {
         },
       });
     },
+    makeRotation(x) {
+      const modelViewer = document.querySelector("#modelid");
+      modelViewer.cameraOrbit = "45deg 55deg 5m";
+    },
   },
 };
 </script>
 <style>
+.vmain-c {
+  position: relative;
+}
 .video-container {
   width: 100%;
   height: 520px;
-  margin: 8px auto;
-  border: 1px solid #1e1e1e;
-  position: relative;
+  border: 2px solid #1e1e1e;
   box-shadow: 1px 1px 1px #9e9e9e;
 }
 .video-here {
-  width: 200px;
-  position: absolute;
-  left: 10px;
-  bottom: 16px;
+  width: 190px;
   border: 1px solid #000;
   border-radius: 1px;
   z-index: 2;
+  position: absolute;
 }
 .video-there {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   z-index: 1;
 }
-.text-right {
-  text-align: left;
+
+.video-there-container {
+  display: flex;
+  width: 300px;
+  flex-direction: row;
+  align-content: flex-start;
+}
+.user_btns {
+  display: inline;
+  position: absolute;
+  top: 580px;
+  left: 25px;
+}
+
+.model_container {
+  width: 100%;
+  height: 520px;
+  margin-left: 40px;
+}
+
+.model_class {
+  height: 520px;
+  width: 400px;
+}
+
+.labels {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+  padding-right: 5px;
+}
+
+.labelBtn {
+  height: 40px;
 }
 </style>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div style="text-align:center">
-    Edu-Code <br><b>{{$randId}}</b>
+    Edu-Code: {{$randId}}</b>
 </div>
 <video-chat randomid="{{ $randId }}" :user="{{ $user }}" 
 :others="{{ $others }}" pusher-key="{{ config('broadcasting.connections.pusher.key') }}" 
