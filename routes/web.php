@@ -6,7 +6,7 @@ use Facade\FlareClient\Stacktrace\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Response;
 use App\Events\ShareRotation;
-
+use App\Http\Controllers\DialogFlowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +44,5 @@ $storagePath = storage_path('app/public/'.$filename);
 Route::get('/share/{data}', function ($data) {
     event(new ShareRotation($data));
 });
+
+Route::post('/label', [DialogFlowController::class, 'notifyWithLabel']);
