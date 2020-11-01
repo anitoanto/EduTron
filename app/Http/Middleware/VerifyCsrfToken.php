@@ -14,6 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'https://edutron.herokuapp.com/login',
         'https://edutron.herokuapp.com/register',
-        'https://dialogflow.cloud.google.com/'
+        'https://dialogflow.cloud.google.com/*'
     ];
 }
