@@ -10,11 +10,11 @@ use App\Events\ShareRotation;
 
 class DialogFlowController extends Controller
 {
-    public function notifyWithLabel()
+    public function notifyWithLabel(Request $request)
     {
-        // $agent = WebhookClient::fromData($request->json()->all());
-        // $intent = $agent->getIntent();
-        // event(new DialogFlowWebhook($intent));
+        $agent = WebhookClient::fromData($request->json()->all());
+        $intent = $agent->getIntent();
+        event(new DialogFlowWebhook($intent));
 
         return response('{
   "fulfillmentMessages": [
@@ -26,8 +26,7 @@ class DialogFlowController extends Controller
       }
     }
   ]
-}', 200)
-            ->header('Content-Type', 'text/plain');
+}', 200)->header('Content-Type', 'text/plain');
 
         // return response()->json([
         //     'fulfillmentMessages' => [
