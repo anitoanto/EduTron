@@ -16,17 +16,22 @@ class DialogFlowController extends Controller
         $intent = $agent->getIntent();
         event(new DialogFlowWebhook($intent));
 
-        return response('{
+        $raw = json_decode($request, true);
+        $chat = $raw['queryText']['fulfillmentText'];
+
+        $res = '{
   "fulfillmentMessages": [
     {
       "text": {
         "text": [
-          "Text response from webhook"
+          "'.$chat.'"
         ]
       }
     }
   ]
-}', 200)->header('Content-Type', 'text/plain');
+}';
+
+        return response('', 200)->header('Content-Type', 'text/plain');
 
         // return response()->json([
         //     'fulfillmentMessages' => [
