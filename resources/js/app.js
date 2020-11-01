@@ -33,4 +33,5 @@ const app = new Vue({
 
 var $contents = $('#frame').contents();
 $contents.scrollTop($contents.height());
-console.log("hello");
+
+

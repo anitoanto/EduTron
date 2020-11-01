@@ -1,11 +1,7 @@
 <template>
   <div class="container vmain-c">
     <div class="labels">
-      <button
-        class="labelBtn"
-        @click="makeRotation(40)"
-        v-text="'Label 1'"
-      />
+      <button class="labelBtn" @click="makeRotation()" v-text="'Label 1'" />
     </div>
     <div class="video-container" ref="video-container">
       <div>
@@ -70,7 +66,7 @@ export default {
               data: data,
             });
           })
-          .on("stream", (stream) => {
+          .on("stream", (stream, message) => {
             const videoThere = this.$refs["video-there"];
             videoThere.srcObject = stream;
           })
@@ -101,6 +97,31 @@ export default {
         const peer = this.getPeer(signal.userId, false);
         peer.signal(signal.data);
       });
+
+      // Initiate the Pusher JS library
+      var pusher2 = new Pusher(this.pusherKey, {
+        authEndpoint: "/home/join/auth",
+        cluster: this.pusherCluster,
+        auth: {
+          headers: {
+            "X-CSRF-Token": document.head.querySelector(
+              'meta[name="csrf-token"]'
+            ).content,
+          },
+        },
+      });
+
+      // Subscribe to the channel we specified in our Laravel Event
+      var channel2 = pusher2.subscribe("presence-rotation");
+
+      // Bind a function to a Event (the full Laravel class)
+      channel2.bind("App\\Events\\ShareRotation", function (data) {
+        // this is called when the event notification is received...
+        console.log(data);
+
+        const modelViewer = document.querySelector("#modelid");
+        modelViewer.cameraOrbit = data.message.replace(/[-]/g, " ");
+      });
     },
     getPusherInstance() {
       return new Pusher(this.pusherKey, {
@@ -115,9 +136,10 @@ export default {
         },
       });
     },
-    makeRotation(x) {
-      const modelViewer = document.querySelector("#modelid");
-      modelViewer.cameraOrbit = "45deg 55deg 5m";
+    makeRotation() {
+      $.get("/share/45deg-55deg-5m", function () {
+        console.log("get request sent");
+      });
     },
   },
 };

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Facade\FlareClient\Stacktrace\File;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Response;
+use App\Events\ShareRotation;
 
 
 /*
@@ -29,6 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'auth'], function () {
   Route::get('/home/join/{randId}', [VideoChatController::class, 'index']);
   Route::post('/home/join/auth', [VideoChatController::class, 'auth']);
+  Route::post('/message', [VideoChatController::class, 'auth']);
   Route::post('/home/join/', [VideoChatController::class, 'GotoRoom']);
 });
 
@@ -37,4 +39,8 @@ $storagePath = storage_path('app/public/'.$filename);
 
             //  return Response::make($storagePath)->response();
             return response()->file($storagePath);
+});
+
+Route::get('/share/{data}', function ($data) {
+    event(new ShareRotation($data));
 });
