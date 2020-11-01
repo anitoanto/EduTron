@@ -15,5 +15,17 @@ class DialogFlowController extends Controller
         $agent = WebhookClient::fromData($request->json()->all());
         $intent = $agent->getIntent();
         event(new DialogFlowWebhook($intent));
+
+        return '{
+  "fulfillmentMessages": [
+    {
+      "text": {
+        "text": [
+          "Text response from webhook"
+        ]
+      }
+    }
+  ]
+}';
     }
 }
