@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'label/webhook'
+        'label/webhook',
+        'https://dialogflow.googleapis.com/*',
     ];
 }
