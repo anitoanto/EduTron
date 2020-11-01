@@ -22,5 +22,15 @@
             </div>
         </div>
     </div>
+    <center>
+    <div>
+
+        <br>
+        <h4>Interact with 3D with your speech.</h4> 
+        <br>
+        <iframe id="frame" allow="microphone" height="500px" width="80%" src="https://bot.dialogflow.com/c1c9e43a-a423-4552-bcc0-dd6481229119"></iframe>
+    </div>
+    </center>
 </div>
+
 @endsection

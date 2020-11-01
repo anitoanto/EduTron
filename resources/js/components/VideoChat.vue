@@ -93,7 +93,7 @@ export default {
       });
       const videoHere = this.$refs["video-here"];
       videoHere.srcObject = stream;
-      videoHere.mute = true;
+      videoHere.muted = true;
       this.stream = stream;
       const pusher = this.getPusherInstance();
       this.channel = pusher.subscribe(`presence-${this.randomid}`);

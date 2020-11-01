@@ -30,3 +30,7 @@ Vue.component('video-chat', require('./components/VideoChat.vue').default);
 const app = new Vue({
     el: '#app',
 });
+
+var $contents = $('#frame').contents();
+$contents.scrollTop($contents.height());
+console.log("hello");

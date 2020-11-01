@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\VideoChatController;
 use Illuminate\Support\Facades\Route;
+use Facade\FlareClient\Stacktrace\File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Response;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +30,11 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/home/join/{randId}', [VideoChatController::class, 'index']);
   Route::post('/home/join/auth', [VideoChatController::class, 'auth']);
   Route::post('/home/join/', [VideoChatController::class, 'GotoRoom']);
+});
+
+Route::get('/storage/{filename}', function($filename) {
+$storagePath = storage_path('app/public/'.$filename);
+
+            //  return Response::make($storagePath)->response();
+            return response()->file($storagePath);
 });
