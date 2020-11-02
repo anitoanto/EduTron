@@ -364,26 +364,157 @@
             font-family: 'Nunito';
         }
     </style>
+
+    <style>
+  * {
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 0;
+    font-family: sans-serif;
+  }
+
+  .container-new {
+    width: 80%;
+    height: 200%;
+    background: #42455a !important;
+
+  }
+
+  .menu ul {
+    display: inline-flex;
+    margin-left: -40px;
+    margin-top: 80px;
+  }
+
+  .menu ul li {
+    text-transform: uppercase;
+    list-style: none;
+    margin: 0 -20px;
+    color: #b2b1b1;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .logo img {
+    width: 40px;
+    margin-top: -7px;
+    margin-right: 48px;
+
+  }
+
+  .active {
+    color: #19dafa !important;
+  }
+
+  .passive {
+    color: #fff;
+  }
+
+  .login-menu {
+    top: 76px;
+    right: 400px;
+    position: absolute;
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    background-image: linear-gradient(#42455a, #42455a), radial-gradient(circle at top left, #fd00da, #19d7f8);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+  }
+
+  .login-menu span {
+    display: block;
+    padding: 6px 10px;
+  }
+
+  .description {
+    width: 80%;
+    height: 70%;
+    left: 130px;
+    margin-top: 50px;
+    position: absolute;
+  }
+
+  .app-text {
+    width: 50%;
+    float: left;
+  }
+
+  .app-text h1 {
+    font-size: 43px;
+    width: 640px;
+    position: relative;
+    margin-left: 20px;
+  }
+
+  .app-text p {
+    font-size: 15px;
+    width: 640px;
+    margin: 1   0px 0 30px 20px;
+    line-height: 25px;
+  }
+
+  .app-picture {
+    width: 100%;
+    float: right;
+  }
+
+  .app-picture img {
+    width: 80%;
+    padding: 30px;
+
+    /* margin-bottom: 40px;
+  margin-left: 700px;
+  border-style: outset;
+  border-radius: 10px;
+  border: 4px solid transparent;
+  background-image: linear-gradient(#42455a,#42455a),radial-gradient(circle at top left,#fd00da,#19d7f8);
+   background-origin: border-box;
+  background-clip: content-box,border-box; */
+  }
+
+  .edt {
+    font-size: 24px;
+    padding: 20px;
+  }
+</style>
 </head>
 
 <body class="antialiased">
-    <div class="auto" style="font-size:xx-large; margin-top:12%; text-align:center;">EduTron Welcome's You</div>
-    <div class="relative flex items-top justify-center sm:pt-0">
-        @if (Route::has('login'))
-        <div class="px-6 py-4 sm:block">
-            @auth
-            <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
-            @else
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
 
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-            @endif
-            @endif
-        </div>
-        @endif
 
+
+<div class="container-new">
+  <div class="menu">
+    <ul>
+      <li class="logo"><img
+          src="https://cdn.discordapp.com/attachments/771345498748616707/772296286643683388/MLOGO.png"></li>
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="{{ route('login') }}" class="login-menu"><span>Log In</span></a></li>
+          <li><a href="{{ route('register') }}"><span>Register</span></a></li>
+        </ul>
     </div>
+    <div class="description">
+        <div class="app-text">
+                                    
+      <h1>Making video classes 3D</h1><br />
+      <h2># Making student explore 3D model realtime with teacher.</h2>
+      <h2># Interact with 3D Model with your speech via Natural Language Processing (NLP) model.</h2>
+      <h2># Teacher could point out labeled parts and realtime, student see those in 3d models alongside of video classes.</h2>
+      <p>Realtime video streaming and 3D model highlighting with labels</p><br>
+      <br>
+    <br>
+    Project by, Anito Anto, Abhijith P, Abhishek V J from the team CRACK HACK.
+    <br>Thank you<br>
+    </p>
+    </div>
+
+  </div>
+</div>
+
+<a href="/" class="edt" style="color:Tomato;">EDUTRON</a>
+
 </body>
 
 </html>
