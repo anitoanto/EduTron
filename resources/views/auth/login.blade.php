@@ -20,7 +20,7 @@
 
         <button type="submit">LOGIN</button><br>
 
-        <a href="/home/login" class="btn btn-primary " style="width:220px">GOTO REGISTRATION</a>
+        <a href="/register" class="btn btn-primary " style="width:220px">GOTO REGISTRATION</a>
       </div>
     </center>
 

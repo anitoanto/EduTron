@@ -17,7 +17,7 @@
             <input type="submit" name="signup-button" value="Create" />
         </form>
     </div>
-    <div class="log-in">Do you have an account ? <br><a href="/home/login" class="btn btn-primary " style="width:170px"> LOGIN</a></div>
+    <div class="log-in">Do you have an account ? <br><a href="/login" class="btn btn-primary " style="width:170px"> LOGIN</a></div>
 </div>
 
 @endsection

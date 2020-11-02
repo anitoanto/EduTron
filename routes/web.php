@@ -46,3 +46,6 @@ Route::get('/share/{data}', function ($data) {
 });
 
 Route::post('/label/webhook', [DialogFlowController::class, 'notifyWithLabel']);
+Route::get('/home/explore', function() {
+  return view('explore');
+});

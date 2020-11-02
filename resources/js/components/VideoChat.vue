@@ -1,7 +1,11 @@
 <template>
-  <div class="container vmain-c">
+  <div class="vmain-c">
     <div class="labels">
-      <button class="labelBtn" @click="makeRotation()" v-text="'Label 1'" />
+      <button class="labelBtn" @click="makeRotation('1deg_84deg_5m')" v-text="'MAIN SHAFT'" />
+      <button class="labelBtn" @click="makeRotation('60deg_74deg_4m')" v-text="'ROPE DRUM'" />
+      <button class="labelBtn" @click="makeRotation('-120deg_78deg_5.3m')" v-text="'ROPE DRUM HAND BRAKE'" />
+      <button class="labelBtn" @click="makeRotation('-202deg_100deg_5.6m')" v-text="'HYDRAULIC PUMP'" />
+      <button class="labelBtn" @click="makeRotation('-40deg_84deg_5m')" v-text="'GYPSY HEAD'" />
     </div>
     <div class="video-container" ref="video-container">
       <div>
@@ -14,7 +18,7 @@
           <model-viewer
             class="model_class"
             id="modelid"
-            src="/storage/cube_model.glb"
+            src="/storage/machine_model_joined.glb"
             shadow-intensity="1"
             camera-controls
             interaction-prompt="none"
@@ -45,6 +49,14 @@ export default {
     };
   },
   mounted() {
+    const modelViewer = document.querySelector("#modelid");
+    // rope_drum 60deg 74deg 4m
+    // main_shaft 1deg 84deg 5m
+    // gypsy_head -40deg 84deg 5m
+    // rope_drum_band_brake -120deg 78deg 5.3m
+    // hydraulic_pump -202deg 100deg 5.6m
+
+    modelViewer.cameraOrbit = "60deg 74deg 7.4m"; //default
     this.setupVideoChat();
   },
   methods: {
@@ -120,7 +132,7 @@ export default {
         console.log(data);
 
         const modelViewer = document.querySelector("#modelid");
-        modelViewer.cameraOrbit = data.message.replace(/[-]/g, " ");
+        modelViewer.cameraOrbit = data.message.replace(/[_]/g, " ");
       });
     },
     getPusherInstance() {
@@ -136,8 +148,8 @@ export default {
         },
       });
     },
-    makeRotation() {
-      $.get("/share/45deg-55deg-5m", function () {
+    makeRotation(labelid) {
+      $.get("/share/" + labelid, function () {
         console.log("get request sent");
       });
     },
@@ -147,9 +159,11 @@ export default {
 <style>
 .vmain-c {
   position: relative;
+  margin: 0 150px;
 }
 .video-container {
   width: 100%;
+  position: relative;
   height: 520px;
   border: 2px solid #1e1e1e;
   box-shadow: 1px 1px 1px #9e9e9e;
@@ -176,7 +190,7 @@ export default {
 .user_btns {
   display: inline;
   position: absolute;
-  top: 580px;
+  top: 530px;
   left: 25px;
 }
 
@@ -188,7 +202,7 @@ export default {
 
 .model_class {
   height: 520px;
-  width: 400px;
+  width: 590px;
 }
 
 .labels {
@@ -199,6 +213,13 @@ export default {
 }
 
 .labelBtn {
-  height: 40px;
+  height: 100%;
+  min-width: 100px;
+  border: 1px darkblue;
+  background-color: lightblue;
+  padding: 10px;
+  font-size: 19px;
+  border-radius: 10px;
+  margin-right: 20px;
 }
 </style>
